@@ -151,6 +151,8 @@ class PlayState extends MusicBeatState
 	// stores the last combo objects in an array
 	public static var lastCombo:Array<FlxSprite>;
 
+	var controllermode:Bool = #if android true #else false #end;
+
 	// at the beginning of the playstate
 	override public function create()
 	{
@@ -427,7 +429,7 @@ class PlayState extends MusicBeatState
 
 		if ((key >= 0)
 			&& !boyfriendStrums.autoplay
-			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED) || Init.trueSettings.get('Controller Mode'))
+			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED) || controllermode)
 			&& (FlxG.keys.enabled && !paused && (FlxG.state.active || FlxG.state.persistentUpdate)))
 		{
 			if (generatedMusic)
