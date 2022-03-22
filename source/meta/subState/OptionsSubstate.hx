@@ -296,11 +296,7 @@ class OptionsSubstate extends MusicBeatSubState
 				});
 			}
 			else if (controls.BACK)
-                                #if android
-                                Main.switchState(this, FlxG.state);
-                                #else
 				close();
-                                #end
 		}
 		else
 			subMenuControl();
