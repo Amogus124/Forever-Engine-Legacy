@@ -15,6 +15,7 @@ import meta.data.dependency.Discord;
 import meta.data.dependency.FNFSprite;
 import meta.data.font.Alphabet;
 import meta.subState.OptionsSubstate;
+import android.AndroidControlsMenu;
 
 /**
 	Options menu rewrite because I'm unhappy with how it was done previously
@@ -55,6 +56,7 @@ class OptionsMenuState extends MusicBeatState
 					['preferences', callNewGroup],
 					['appearance', callNewGroup],
 					['controls', openControlmenu],
+					['android controls', androidControlsMenu],
 					['exit', exitMenu]
 				]
 			],
@@ -131,6 +133,10 @@ class OptionsMenuState extends MusicBeatState
 		add(infoText);
 
 		loadSubgroup('main');
+
+                #if android
+	        addVirtualPad(UP_DOWN, A_B);
+                #end
 	}
 
 	private var currentAttachmentMap:Map<Alphabet, Dynamic>;
@@ -578,6 +584,22 @@ class OptionsMenuState extends MusicBeatState
 			FlxFlicker.flicker(activeSubgroup.members[curSelection], 0.5, 0.06 * 2, true, false, function(flick:FlxFlicker)
 			{
 				Main.switchState(this, new MainMenuState());
+				lockedMovement = false;
+			});
+		}
+		//
+	}
+
+	public function androidControlsMenu()
+	{
+		//
+		if (controls.ACCEPT)
+		{
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+			lockedMovement = true;
+			FlxFlicker.flicker(activeSubgroup.members[curSelection], 0.5, 0.06 * 2, true, false, function(flick:FlxFlicker)
+			{
+				Main.switchState(this, new AndroidControlsMenu());
 				lockedMovement = false;
 			});
 		}
