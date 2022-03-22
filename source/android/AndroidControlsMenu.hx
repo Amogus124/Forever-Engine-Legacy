@@ -6,6 +6,7 @@ import flixel.ui.FlxButton;
 import flixel.text.FlxText;
 import flixel.FlxG;
 import flixel.FlxSprite;
+import meta.MusicBeat.MusicBeatState;
 import android.FlxHitbox;
 import android.AndroidControls.Config;
 import android.FlxVirtualPad;
