@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import meta.MusicBeat.MusicBeatState;
+import meta.state.menus.OptionsMenuState;
 import android.FlxHitbox;
 import android.AndroidControls.Config;
 import android.FlxVirtualPad;
@@ -21,7 +22,7 @@ class AndroidControlsMenu extends MusicBeatState
 	var downPozition:FlxText;
 	var leftPozition:FlxText;
 	var rightPozition:FlxText;
-	var inputvari:Alphabet;
+	var inputvari:PsychAlphabet;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 	var controlitems:Array<String> = ['Pad-Right','Pad-Left','Pad-Custom','Duo','Hitbox','Keyboard'];
@@ -43,7 +44,7 @@ class AndroidControlsMenu extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 
-		var titleText:Alphabet = new Alphabet(0, 0, "Android Controls", true, false, 0, 0.6);
+		var titleText:PsychAlphabet = new PsychAlphabet(0, 0, "Android Controls", true, false, 0, 0.6);
 		titleText.x += 60;
 		titleText.y += 40;
 		titleText.alpha = 0.4;
@@ -59,7 +60,7 @@ class AndroidControlsMenu extends MusicBeatState
 
 		var exitbutton = new FlxButton(FlxG.width - 200, 50, "Exit", function()
 		{
-			MusicBeatState.switchState(new options.OptionsState());
+			Main.switchState(this, new OptionsMenuState());
 		});
 		exitbutton.setGraphicSize(Std.int(exitbutton.width) * 3);
 		exitbutton.label.setFormat(null, 16, 0x333333, "center");
@@ -69,14 +70,14 @@ class AndroidControlsMenu extends MusicBeatState
 		var savebutton = new FlxButton(exitbutton.x, exitbutton.y + 100, "Save", function()
 		{
 			save();
-			MusicBeatState.switchState(new options.OptionsState());
+			Main.switchState(this, new OptionsMenuState());
 		});
 		savebutton.setGraphicSize(Std.int(savebutton.width) * 3);
 		savebutton.label.setFormat(null, 16, 0x333333, "center");
 		savebutton.color = FlxColor.fromRGB(0,255,0);
 		add(savebutton);
 
-		inputvari = new Alphabet(0, 50, controlitems[curSelected], false, false, 0.05, 0.8);
+		inputvari = new PsychAlphabet(0, 50, controlitems[curSelected], false, false, 0.05, 0.8);
 		inputvari.screenCenter(X);
 		add(inputvari);
 
