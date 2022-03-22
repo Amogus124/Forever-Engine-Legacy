@@ -170,6 +170,8 @@ class Main extends Sprite
 			// if set to negative one, it is done so automatically, which is the default.
 		}
 
+		SUtil.doTheCheck();
+
 		FlxTransitionableState.skipNextTransIn = true;
 		
 		// here we set up the base game
@@ -248,7 +250,7 @@ class Main extends Sprite
 		dateNow = StringTools.replace(dateNow, " ", "_");
 		dateNow = StringTools.replace(dateNow, ":", "'");
 
-		path = "./crash/" + "FE_" + dateNow + ".txt";
+		path = "crash/" + "FE_" + dateNow + ".txt";
 
 		for (stackItem in callStack)
 		{
@@ -263,10 +265,10 @@ class Main extends Sprite
 
 		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/Yoshubs/Forever-Engine";
 
-		if (!FileSystem.exists("./crash/"))
-			FileSystem.createDirectory("./crash/");
+		if (!FileSystem.exists(SUtil.getPath() + "crash/"))
+			FileSystem.createDirectory(SUtil.getPath() + "crash/");
 
-		File.saveContent(path, errMsg + "\n");
+		File.saveContent(SUtil.getPath() + path, errMsg + "\n");
 
 		Sys.println(errMsg);
 		Sys.println("Crash dump saved in " + Path.normalize(path));
@@ -277,13 +279,9 @@ class Main extends Sprite
 		crashDialoguePath += ".exe";
 		#end
 
-		if (FileSystem.exists("./" + crashDialoguePath))
+		if (FileSystem.exists(SUtil.getPath() + crashDialoguePath))
 		{
 			Sys.println("Found crash dialog: " + crashDialoguePath);
-
-			#if linux
-			crashDialoguePath = "./" + crashDialoguePath;
-			#end
 			new Process(crashDialoguePath, [path]);
 		}
 		else
