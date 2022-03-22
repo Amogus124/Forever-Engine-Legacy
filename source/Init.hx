@@ -51,7 +51,7 @@ class Init extends FlxState
 			NOT_FORCED
 		],
 		'Controller Mode' => [
-			false,
+			#if android true #else false #end,
 			Checkmark,
 			'Whether to play with\na controller instead of using your Keyboard',
 			NOT_FORCED
