@@ -345,6 +345,10 @@ class PlayState extends MusicBeatState
 		dialogueHUD.bgColor.alpha = 0;
 		FlxG.cameras.add(dialogueHUD);
 
+                #if android
+	        addPadCamera();
+                #end
+
 		//
 		keysArray = [
 			copyKey(Init.gameControls.get('LEFT')[0]),
@@ -545,7 +549,7 @@ class PlayState extends MusicBeatState
 
 		if (!inCutscene) {
 			// pause the game if the game is allowed to pause and enter is pressed
-			if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
+			if (FlxG.keys.justPressed.ENTER	#if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 			{
 				// update drawing stuffs
 				persistentUpdate = false;
@@ -1540,6 +1544,9 @@ class PlayState extends MusicBeatState
 		canPause = false;
 		songMusic.volume = 0;
 		vocals.volume = 0;
+	        #if android
+	        androidc.visible = false;
+	        #end
 		if (SONG.validScore)
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty);
 
@@ -1713,7 +1720,7 @@ class PlayState extends MusicBeatState
 	}
 
 	function callTextbox() {
-		var dialogPath = Paths.json(SONG.song.toLowerCase() + '/dialogue');
+		var dialogPath = SUtil.getPath() + Paths.json(SONG.song.toLowerCase() + '/dialogue');
 		if (sys.FileSystem.exists(dialogPath))
 		{
 			startedCountdown = false;
@@ -1757,6 +1764,9 @@ class PlayState extends MusicBeatState
 		swagCounter = 0;
 
 		camHUD.visible = true;
+	        #if android
+	        androidc.visible = true;
+	        #end
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
