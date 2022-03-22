@@ -50,12 +50,6 @@ class Init extends FlxState
 			'Whether to have the strumline vertically flipped in gameplay.',
 			NOT_FORCED
 		],
-		'Controller Mode' => [
-			#if android true #else false #end,
-			Checkmark,
-			'Whether to play with a controller instead of using your Keyboard',
-			NOT_FORCED
-		],
 		'Auto Pause' => [true, Checkmark, '', NOT_FORCED],
 		'FPS Counter' => [true, Checkmark, 'Whether to display the FPS counter.', NOT_FORCED],
 		'Memory Counter' => [
