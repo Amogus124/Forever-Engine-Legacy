@@ -42,7 +42,7 @@
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript" />
 	<haxelib name="flixel-ui" />
-	<haxelib name="discord_rpc"/>
+	<haxelib name="discord_rpc" unless="android"/>
         <haxelib name="AndroidTools" if="android"/>
 
         <config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
