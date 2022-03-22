@@ -103,7 +103,7 @@ class DialogueBox extends FlxSpriteGroup
 		var truePath = Paths.file(file);
 
 		// load the json file
-		if (sys.FileSystem.exists(dialoguePath))
+		if (sys.FileSystem.exists(SUtil.getPath() + dialoguePath))
 			return dialoguePath;
 		else
 			return truePath;
@@ -151,7 +151,7 @@ class DialogueBox extends FlxSpriteGroup
 		add(alphabetText);
 
 		// skip text
-		var skipText = new FlxText(100, 670, 1000, "PRESS SHIFT TO SKIP", 20);
+		var skipText = new FlxText(100, 670, 1000, "PRESS SHIFT / BACK TO SKIP", 20);
 		skipText.alignment = FlxTextAlign.CENTER;
 
 		skipText.borderStyle = FlxTextBorderStyle.OUTLINE;
