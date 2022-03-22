@@ -56,6 +56,11 @@ class GameOverSubstate extends MusicBeatSubState
 		FlxG.camera.target = null;
 
 		bf.playAnim('firstDeath');
+
+                #if android
+	        addVirtualPad(NONE, A_B);
+                addPadCamera();
+                #end
 	}
 
 	override function update(elapsed:Float)
